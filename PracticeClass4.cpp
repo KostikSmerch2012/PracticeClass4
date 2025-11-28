@@ -93,7 +93,41 @@ void task4_2 (){
 }
 
 void task4_3(){
-  cout << "a";
+    const int width = 160;
+    const int height = 40;
+    
+    char graph[height][width];
+    
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            graph[i][j] = ' ';
+        }
+    }
+    
+    for (int i = 0; i < width; i++) {
+        graph[height/2][i] = '-';
+    }
+    for (int i = 0; i < height; i++) {
+        graph[i][width/2] = '|';
+    }
+    graph[height/2][width/2] = '+';
+    
+    for (int x = 0; x < width; x++) {
+        double x_val = (x - width/2) * 4.0 * M_PI / width;
+        double y_val = sin(x_val);
+        int y = height/2 - (y_val * (height/2 - 1));
+        
+        if (y >= 0 && y < height) {
+            graph[y][x] = '*';
+        }
+    }
+    
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            cout << graph[i][j];
+        }
+        cout << endl;
+    }
   return;
 }
 
