@@ -169,23 +169,36 @@ void task4_4 (int* count){
       break;
   }
 }
-void task4_6(){
-    int n = 3;
+
+void task4_6() {
+    int A[3][4] = {
+        {5, 2, 0, 10},
+        {3, 5, 2, 5},
+        {20, 0, 0, 0}
+    };
     
-    int** C = new int*[n];
-    for(int i = 0; i < n; i++) {
-        C[i] = new int[2];
+    int B[4][2] = {
+        {1, 2},
+        {5, 3},
+        {3, 4},
+        {1, 5}
+    };
+    
+    int C[3][2] = {0};
+    
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 2; j++) {
+            for(int k = 0; k < 4; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
     }
-    
-    C[0][0] = 1; C[0][1] = 2;
-    C[1][0] = 3; C[1][1] = 4;
-    C[2][0] = 5; C[2][1] = 6;
     
     int maxMoneyIdx = 0, minMoneyIdx = 0;
     int maxComIdx = 0, minComIdx = 0;
     int totalMoney = 0, totalCom = 0;
     
-    for(int i = 0; i < n; i++) {
+    for(int i = 0; i < 3; i++) {
         if(C[i][0] > C[maxMoneyIdx][0]) maxMoneyIdx = i;
         if(C[i][0] < C[minMoneyIdx][0]) minMoneyIdx = i;
         if(C[i][1] > C[maxComIdx][1]) maxComIdx = i;
@@ -195,7 +208,7 @@ void task4_6(){
     }
     
     cout << "Матрица C:\n";
-    for(int i = 0; i < n; i++) {
+    for(int i = 0; i < 3; i++) {
         cout << C[i][0] << " " << C[i][1] << endl;
     }
     
@@ -203,14 +216,9 @@ void task4_6(){
          << " продавец, меньше - " << minMoneyIdx+1 << " продавец\n";
     cout << "2) Больше всего получил комиссионных " << maxComIdx+1 
          << " продавец, меньше - " << minComIdx+1 << " продавец\n";
-    cout << "3) Общая сумма денег: " << totalMoney << "\n";
-    cout << "4) Общая сумма комиссионных: " << totalCom << "\n";
-    cout << "5) Всего прошло денег: " << totalMoney + totalCom << "\n";
-    
-    for(int i = 0; i < n; i++) {
-        delete[] C[i];
-    }
-    delete[] C;
+    cout << "3) Общая сумма денег " << totalMoney << "\n";
+    cout << "4) Общая сумма комиссионных " << totalCom << "\n";
+    cout << "5) Всего прошло денег " << totalMoney + totalCom << "\n";
 }
 
 
