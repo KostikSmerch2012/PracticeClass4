@@ -1,7 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include <cmath>
-
+#include <iomanip>
 
 using namespace std;
 
@@ -169,6 +169,50 @@ void task4_4 (int* count){
       break;
   }
 }
+void task4_6(){
+    int n = 3;
+    
+    int** C = new int*[n];
+    for(int i = 0; i < n; i++) {
+        C[i] = new int[2];
+    }
+    
+    C[0][0] = 1; C[0][1] = 2;
+    C[1][0] = 3; C[1][1] = 4;
+    C[2][0] = 5; C[2][1] = 6;
+    
+    int maxMoneyIdx = 0, minMoneyIdx = 0;
+    int maxComIdx = 0, minComIdx = 0;
+    int totalMoney = 0, totalCom = 0;
+    
+    for(int i = 0; i < n; i++) {
+        if(C[i][0] > C[maxMoneyIdx][0]) maxMoneyIdx = i;
+        if(C[i][0] < C[minMoneyIdx][0]) minMoneyIdx = i;
+        if(C[i][1] > C[maxComIdx][1]) maxComIdx = i;
+        if(C[i][1] < C[minComIdx][1]) minComIdx = i;
+        totalMoney += C[i][0];
+        totalCom += C[i][1];
+    }
+    
+    cout << "Матрица C:\n";
+    for(int i = 0; i < n; i++) {
+        cout << C[i][0] << " " << C[i][1] << endl;
+    }
+    
+    cout << "\n1) Больше всего получил денег " << maxMoneyIdx+1 
+         << " продавец, меньше - " << minMoneyIdx+1 << " продавец\n";
+    cout << "2) Больше всего получил комиссионных " << maxComIdx+1 
+         << " продавец, меньше - " << minComIdx+1 << " продавец\n";
+    cout << "3) Общая сумма денег: " << totalMoney << "\n";
+    cout << "4) Общая сумма комиссионных: " << totalCom << "\n";
+    cout << "5) Всего прошло денег: " << totalMoney + totalCom << "\n";
+    
+    for(int i = 0; i < n; i++) {
+        delete[] C[i];
+    }
+    delete[] C;
+}
+
 
 int main() {
     setlocale(LC_ALL, "Russian");
@@ -193,6 +237,9 @@ int main() {
         task4_4(&count);
         break;
       }
+    case 6:
+      task4_6();
+      break;
     default:
       cout << "Нету такой таски" << endl;
       break;
